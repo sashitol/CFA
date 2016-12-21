@@ -1,4 +1,5 @@
 public class AccountController {
+//test
 @AuraEnabled
     public static List<Account> getAccountsA()
     {
