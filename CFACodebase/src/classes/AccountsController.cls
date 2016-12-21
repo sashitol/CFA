@@ -1,4 +1,5 @@
 public class AccountsController {
+	//test checkin
   @AuraEnabled
   public static List<Account> getAccounts() {
     return [SELECT Id, name, industry, Type, NumberOfEmployees, TickerSymbol, Phone
