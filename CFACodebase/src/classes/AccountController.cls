@@ -1,5 +1,5 @@
 public class AccountController {
-	//Hi 
+	//Hi Rajendra comments
 @AuraEnabled
     public static List<Account> getAccountsA()
     {
