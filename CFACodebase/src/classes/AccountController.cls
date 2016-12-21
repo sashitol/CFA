@@ -2,7 +2,7 @@ public class AccountController {
 	//Hi 
 	//new changes
 	
-	//d
+	//ddfds
 @AuraEnabled
     public static List<Account> getAccountsA()
     {
