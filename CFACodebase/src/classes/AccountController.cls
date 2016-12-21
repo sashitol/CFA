@@ -1,8 +1,6 @@
 public class AccountController {
-	//Hi 
-	//new changes
-	
-	//ddfds
+	//Hi Rajendra sanddeep comments
+
 @AuraEnabled
     public static List<Account> getAccountsA()
     {
