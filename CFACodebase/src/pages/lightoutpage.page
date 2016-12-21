@@ -1,0 +1,34 @@
+<apex:page applyBodyTag="false" controller="LookupCController" docType="html-5.0" >
+
+<div id="lightning" />
+
+  <html>
+    <head>
+      <apex:includeScript value="/lightning/lightning.out.js"/>
+      <apex:stylesheet value="{!URLFOR($Resource.SLDS214, 'assets/styles/salesforce-lightning-design-system-vf.css')}"/>
+    </head>
+    <body >
+      <div class="slds">
+        <div class="slds-form-element slds-m-top--xx-small">
+          <div class="slds-m-right--x-small" id="account_lookup"></div>
+        </div>
+      </div>
+    </body>
+    <script>
+      function initLookup() {
+        
+        $Lightning.use("c:LookupApp", function () {
+          $Lightning.createComponent("c:Lookup", {
+            lookupAPIName: "api hi name"
+          }, 'lightning', function (cmp) {
+ 			       console.log('component created');
+			       console.log(cmp);
+	          });
+        });
+      }
+      
+      initLookup();
+    </script>
+  </html>
+Hi
+</apex:page>

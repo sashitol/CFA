@@ -1,0 +1,54 @@
+.THIS th.thAlign{
+    height:34px;
+    vertical-align:middle;
+}
+
+.THIS select{
+    height:2.5em !important;
+}
+.THIS svg.small{
+    height: 11px;
+}
+
+.THIS th{
+    min-width: 100px;
+}
+
+.THIS th.active{
+    background-color: none;/*#f4f6f9*/
+    color : rgb(0, 112, 210);
+}
+.THIS th:hover,.THIS svg:hover {
+    color : rgb(0, 112, 210);
+}
+
+.THIS th.slds-is-sortable span.toggle:after{
+    font-family: 'oneIconFont';
+    text-rendering: optimizeLegibility;
+    display: inline-block;
+    padding: 0 5px;
+    position: relative;
+    left: .5rem;
+    content: '\00a0';
+    background-size: 90%;
+    background-position: 0 1px;
+    background-repeat: no-repeat;
+}
+
+.THIS th.slds-is-sorted--asc span.toggle::after{
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MiIgaGVpZ2h0PSI1MiIgdmlld0JveD0iMCAwIDUyIDUyIj48cGF0aCBmaWxsPSIjNTQ2OThEIiBkPSJtNDEuNCAyMWMwLjgtMC44IDAuOC0xLjkgMC0yLjdsLTE1LTE0LjdjLTAuOC0wLjgtMi0wLjgtMi44IDBsLTE1IDE0LjdjLTAuOCAwLjgtMC44IDEuOSAwIDIuN2wyLjggMi43YzAuOCAwLjggMiAwLjggMi44IDBsNC43LTQuNmMwLjgtMC44IDIuMi0wLjIgMi4yIDAuOXYyN2MwIDEgMC45IDIgMiAyaDRjMS4xIDAgMi0xLjEgMi0ydi0yN2MwLTEuMiAxLjQtMS43IDIuMi0wLjlsNC43IDQuNmMwLjggMC44IDIgMC44IDIuOCAwbDIuNi0yLjd6Ij48L3BhdGg+PC9zdmc+");
+    opacity: 1;
+}
+
+.THIS th.slds-is-sorted--desc span.toggle::after{
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MicgaGVpZ2h0PSc1Micgdmlld0JveD0nMCAwIDUyIDUyJz48cGF0aCBmaWxsPScjNTQ2OThEJyBkPSdtOS42IDMxYy0wLjggMC44LTAuOCAxLjkgMCAyLjdsMTUgMTQuN2MwLjggMC44IDIgMC44IDIuOCAwbDE1LjEtMTQuN2MwLjgtMC44IDAuOC0xLjkgMC0yLjdsLTIuOC0yLjdjLTAuOC0wLjgtMi0wLjgtMi44IDBsLTQuNyA0LjZjLTAuOCAwLjgtMi4yIDAuMy0yLjItMC45di0yN2MwLTEtMC45LTItMi0yaC00Yy0xLjEgMC0yIDEuMS0yIDJ2MjdjMCAxLjItMS40IDEuNy0yLjIgMC45bC00LjctNC42Yy0wLjgtMC44LTItMC44LTIuOCAwbC0yLjcgMi43eic+PC9wYXRoPjwvc3ZnPg==");
+	opacity: 1;
+}
+
+.THIS .slds-table--cell-buffer tr > th:not(:first-child){
+   padding-left: .5rem;
+}
+
+.THIS .hidden{
+    display:none !important;
+}

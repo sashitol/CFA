@@ -1,0 +1,5 @@
+<!--c:errorHandlingCustom-->
+<aura:component >
+    Enter a number: <ui:inputText aura:id="inputCmp" onError="{!c.handleError}" onClearErrors="{!c.handleClearError}"/> <br/>
+    <ui:button label="Submit" press="{!c.doAction}"/>
+</aura:component>

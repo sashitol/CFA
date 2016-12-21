@@ -1,0 +1,165 @@
+<aura:component access="global">
+    <ltng:require scripts="/resource/ldt__lodash/js/lodash.min.js,/resource/ldt__momenttz/moment-timezone/moment.min.js,/resource/ldt__momenttz/moment-timezone/moment-timezone-with-data-2010-2020.min.js" styles="/resource/ldt__SLDS202/assets/styles/salesforce-lightning-design-system-ltng.min.css" afterScriptsLoaded="{!c.setLodashLoaded}"/>
+    <aura:attribute name="title" type="String" access="global"/>
+    <aura:attribute name="titleClass" type="String" access="global" default=""/>
+    <aura:attribute name="header" type="List" access="global" default="[]"/>
+    <aura:attribute name="dataRows" type="List" access="global"/>
+    <aura:attribute name="config" type="Map" access="global"/>
+    <aura:attribute name="selectedRows" type="List" access="global" default="[]"/>
+    <aura:attribute name="unSelectedRows" type="List" access="public" default="[]"/>
+
+    <aura:attribute name="_columns" type="List" access="public"/>
+    <aura:attribute name="rowsToDisplay" type="List" access="public" default="[]"/>
+    <aura:attribute name="sortOrder" type="String" access="public"/>
+    <aura:attribute name="sortColumn" type="Map" default="{'label':'','name':''}" access="public"/>
+
+    <aura:attribute name="_rows" type="List" access="private"/>
+    <aura:attribute name="limit" type="Integer" access="private" default="10"/>
+    <aura:attribute name="offset" type="Integer" access="private" default="0"/>
+    <aura:attribute name="searchTxt" type="String" access="private"/>
+    <aura:attribute name="searchByCol" type="String" default="" access="private"/>
+    <aura:attribute name="showDtView" type="Boolean" access="private" default="false"/>
+    <aura:attribute name="init" type="Boolean" access="private" default="false" />
+    <aura:attribute name="lodashLoaded" type="Boolean" access="private" default="false" />
+    <aura:attribute name="selectAll" type="Boolean" access="private" default="false"/>
+    <aura:attribute name="reRender" type="Boolean" access="public" default="false"/>
+    <aura:handler name="sortColumnByEvt" event="ldt:sortColumnBy" action="{!c.sortColumn}"/>
+
+    <!-- action click event -->
+    <aura:registerEvent name="dtActionClick" type="ldt:clickedDtAction"/>
+
+
+    <!-- public api methods -->
+    <aura:method name="initialize" action="{!c.initialize}" access="global"/>
+    <aura:method name="addRow" action="{!c.addRow}" access="global">
+        <aura:attribute name="row" type="Map"/>
+    </aura:method>
+    <aura:method name="deleteRow" action="{!c.deleteRow}" access="global">
+        <aura:attribute name="index" type="Integer"/>
+    </aura:method>
+    <aura:method name="updateRow" action="{!c.updateRow}" access="global">
+        <aura:attribute name="index" type="Integer"/>
+        <aura:attribute name="row" type="Map"/>
+    </aura:method>
+    <aura:method name="rerenderRows" action="{!c.reInitialize}" access="global"/>
+    <aura:method name="clearAllRows" action="{!c.clearAllRows}" access="public" />
+
+    <div class="ldtdev">
+        <div class="{!(v.showDtView)? 'slds-card':'slds-hide'}">
+            <div class="slds-card__header slds-grid">
+                <!-- table title begin -->
+                <div class="slds-media slds-media--center slds-has-flexi-truncate">
+                    <div class="slds-media__figure"></div>
+                    <div class="slds-media__body slds-truncate">
+                        <a href="javascript:void(0);" class="slds-text-link--reset">
+                            <span class="{!(v.titleClass != '') ? v.titleClass : 'slds-text-heading--medium'}">{!v.title}</span>
+                        </a>
+                    </div>
+                </div>
+                 <!-- table title end -->
+
+                 <!-- table actions holder -->
+                <div aura:id="dtTableActions" class="slds-no-flex"></div>
+            </div>
+
+            <div class="slds-card__body slds-text-align--center">
+                <div aura:id="dtTable" class="contents" style="padding:12px;">
+                    <div class="slds-grid slds-wrap slds-grid--vertical-align-center slds-p-bottom--small">
+                        <!-- rows per page begin -->
+                        <div class="slds-col slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-5">
+                            <ui:inputSelect aura:id="itemsPerPage" class="slds-select" label="Items per page:" change="{!c.limitChange}">
+                            </ui:inputSelect>
+                        </div>
+                        <!-- rows per page end -->
+                        <div class="slds-col slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-5"></div>
+                        <div class="slds-col slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-5"></div>
+                        <!-- searchby column begin -->
+                        <div class="slds-col slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-5">
+                            <aura:if isTrue="{!v.config.searchByColumn}">
+                                <ui:inputSelect change="{!c.searchRowByColumn}" class="slds-select" label="Search by Column:">
+                                    <ui:inputSelectOption text="" label="--None--"/>
+                                    <aura:iteration items="{!v._columns}" var="col">
+                                        <ui:inputSelectOption text="{!col.name}" label="{!col.label}"/>
+                                    </aura:iteration>
+                                </ui:inputSelect>
+                            </aura:if>
+                        </div>
+                        <!-- searchby column end -->
+
+                        <!-- search box begin -->
+                        <div class="slds-col slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-5">
+                            <aura:if isTrue="{!v.config.searchBox}">
+                                <ui:inputText value="{!v.searchTxt}" label="Search:" class="slds-input" updateOn="keyup" keyup="{!c.searchForText}"/>
+                            </aura:if>
+                        </div>
+                        <!-- search box end -->
+                    </div>
+                    
+                    <!-- select all for mobile/tab begin -->
+                    <aura:if isTrue="{!and(v.config.massSelect,or($Browser.isTablet,$Browser.isPhone))}">
+                        <div class="slds-float--right">
+							<div class="slds-form-element">
+                                <div class="slds-form-element__control">
+                                    <span class="slds-checkbox">
+                                        <input type="checkbox" name="options" id="{!globalId + 'select-1'}" aura:id="selectAllCmp" onchange="{!c.toggleRowsCheckbox}"/>
+                                        <label class="slds-checkbox__label" for="{!globalId + 'select-1'}">
+                                            <span class="slds-checkbox--faux"></span>
+                                            <span class="slds-form-element__label">Select All</span>
+                                        </label>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+					</aura:if>   
+                    <!-- select all for mobile/tab end -->
+
+                    <table class="slds-table slds-table--bordered slds-table--cell-buffer slds-table--fixed-layout slds-box slds-max-medium-table--stacked-horizontal" aura:id="tableContent">
+                        <thead>
+                            <tr class="slds-text-heading--label">
+
+                                <!-- select all checkbox begin -->
+                                <aura:if isTrue="{!v.config.massSelect}">
+                                    <th style="width: 48px;">
+										<div class="slds-form-element">
+                                            <div class="slds-form-element__control">
+                                                <span class="slds-checkbox">
+                                                    <input type="checkbox" name="options" id="{!globalId + 'select-1'}" aura:id="selectAllCmp" onchange="{!c.toggleRowsCheckbox}"/>
+                                                    <label class="slds-checkbox__label" for="{!globalId + 'select-1'}">
+                                                        <span class="slds-checkbox--faux"></span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                </aura:if>
+                                <!-- select all checkbox end -->
+
+                                <!-- action header begin -->
+                                <aura:if isTrue="{!not(empty(v.config.rowAction))}">
+                                    <th>Action</th>
+                                </aura:if>
+                                <!-- action header end -->
+
+                                <aura:iteration items="{!v._columns}" var="column">
+                                    <ldt:dtColumn aura:id="colHeader" column="{!column}" sortColumn="{!v.sortColumn}" sortOrder="{!v.sortOrder}"/>
+                                </aura:iteration>
+                            </tr>
+                        </thead>
+                        <tbody aura:id="tbody">
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="slds-card__footer slds-grid">
+            	<div class="slds-col slds-size--1-of-2" style="text-align:left">
+                        Showing {! (v._rows.length ? v.offset + 1 : v.offset)} to {!((v.offset + v.limit) lt (v._rows.length) ) ? (v.offset + v.limit) : (v._rows.length) } of {!v._rows.length} records
+                </div>
+                <div aura:id="pageNumber" class="slds-col slds-size--1-of-2">
+                    <button onclick="{!c.previous}" class="slds-button slds-button--brand " disabled="{!v.offset == 0 ? 'disabled':''}">Previous</button>
+                    <button onclick="{!c.next}" class="slds-button slds-button--brand " disabled="{! v.offset + v.limit >= (v._rows.length) || (v._rows.length == v.limit) ? 'disabled':''}">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

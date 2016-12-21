@@ -1,0 +1,51 @@
+<apex:page applyBodyTag="false" standardController="Account" extensions="LookupCController" docType="html-5.0" showHeader="true" sidebar="false" standardStylesheets="false">
+
+<div id="lightning" />
+
+  <html xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+    <head>
+      <apex:includeScript value="/lightning/lightning.out.js"/>
+      <apex:stylesheet value="{!URLFOR($Resource.SLDS214, 'assets/styles/salesforce-lightning-design-system-vf.css')}"/>
+    </head>
+    <body >
+      <div class="slds">
+        <div class="slds-form-element slds-m-top--xx-small">
+          <div class="slds-m-right--x-small" id="account_lookup"></div>
+        </div>
+      </div>
+    </body>
+    <script>
+      function initLookup() {
+        
+        $Lightning.use("c:LookupContainer", function () {
+          $Lightning.createComponent("c:Lookup", {
+            lookupAPIName: "{!Account.id}"
+            
+          }, 'lightning', function (cmp) {
+          
+              alert('hi');
+          });
+        });
+      }
+      
+      initLookup();
+    </script>
+  </html>
+
+  <apex:form >
+   <apex:pageblock >
+     <apex:pageblockSection title="Account Standard Controller Output">
+         <apex:outputField value="{!account.name}"/>
+         <apex:outputField value="{!account.Annualrevenue}"/>
+         <apex:outputField value="{!account.AccountNumber}"/>
+         <apex:outputField value="{!account.Type}"/>
+         <apex:outputField value="{!account.AccountSource}"/>
+         <apex:outputField value="{!account.NumberOfEmployees}"/>
+         <apex:outputField value="{!account.Description}"/>
+         <apex:outputField value="{!account.Industry}"/>
+         <apex:outputField value="{!account.Website}"/>
+         <apex:outputField value="{!account.Rating}"/>
+     </apex:pageblockSection>
+   </apex:pageblock>
+  </apex:form>
+</apex:page>

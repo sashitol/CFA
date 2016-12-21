@@ -1,0 +1,9 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+	
+<aura:registerEvent name="cmpEvent" type="c:ceEvent"/>
+<h1>Simple Component Event Sample</h1>
+<p><ui:button label="Click here to fire a component event"
+press="{!c.fireComponentEvent}" />
+</p>
+
+</aura:component>

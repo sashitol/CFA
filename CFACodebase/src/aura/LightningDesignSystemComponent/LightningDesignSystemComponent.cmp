@@ -1,0 +1,81 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" >
+<!-- from eclipse grid -->
+<ltng:require styles="/resource/SLDS214/assets/styles/salesforce-lightning-design-system-ltng.css" />
+
+    <div class="slds-grid">
+  <div class="slds-col">
+    <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center">col</div>
+  </div>
+  <div class="slds-col">
+    <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center">col</div>
+  </div>
+</div>
+
+    
+    <lightning:icon iconName="action:add_contact" size="large" alternativeText="Indicates approval"/>
+        
+    
+    <!--1 center -->
+   <div class="slds-align--absolute-center">This content will be positioned in the absolute center of its container</div>
+
+    <!--2 right and left --> 
+    <section class="slds-clearfix">
+    <div class="slds-float--left">
+    	<p>I’m floooaaaating</p>
+	 </div>
+    </section>    
+
+    <!-- 3 grid --> 
+    
+ <div class="slds-grid">
+  <div class="slds-col">
+    <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center">col</div>
+  </div>
+  <div class="slds-col">
+    <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center">col</div>
+  </div>
+</div>
+
+<a href="javascript:void(0);" class="slds-text-link--reset">This text is a link but looks like normal text...<span class="slds-text-link">More</span>.</a>
+<a href="javascript:void(0);" class="slds-has-blur-focus">Link with blur focus</a>
+
+<ul class="slds-has-block-links">
+  <li><a href="javascript:void(0);">Vertical List with block links</a></li>
+  <li><a href="javascript:void(0);">List Item</a></li>
+  <li><a href="javascript:void(0);">List Item</a></li>
+</ul>    
+<ul >
+  <li><a href="javascript:void(0);">Vertical List with block links</a></li>
+  <li><a href="javascript:void(0);">List Item</a></li>
+  <li><a href="javascript:void(0);">List Item</a></li>
+</ul>    
+    
+   <div class="slds-m-top--xxx-small">aaa</div>
+ 
+    
+ <div class="slds-is-relative">
+  <div style="position:absolute;top:1rem;left:1rem;border:1px solid red;background:#f4f6f9;">An absolutely positioned element is positioned relative to the nearest positioned ancestor.</div>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</div>
+    
+    
+ <div class="slds-media">
+  <div class="slds-media__figure">
+    <img src="/assets/images/avatar3.jpg" class="slds-avatar--large" alt="Placeholder" />
+  </div>
+  <div class="slds-media__body">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat minus molestias reprehenderit consequuntur sapiente. Modi veritatis totam accusantium numquam assumenda.</p>
+  </div>
+</div>
+    <nav role="navigation" aria-label="Breadcrumbs">
+      <ol class="slds-breadcrumb slds-list--horizontal">
+        <li class="slds-breadcrumb__item slds-text-title--caps"><a href="javascript:void(0);">Parent Entity</a></li>
+        <li class="slds-breadcrumb__item slds-text-title--caps"><a href="javascript:void(0);">Parent Record Name</a></li>
+      </ol>
+    </nav>
+
+        <button class="slds-button slds-button--brand" >Button Neutral</button>
+
+    
+    
+</aura:component>

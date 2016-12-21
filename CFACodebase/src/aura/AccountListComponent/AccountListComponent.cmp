@@ -1,0 +1,30 @@
+<aura:component controller="AccountController" implements="force:appHostable,force:lightningQuickAction">
+<ltng:require styles="/resource/SLDS214/assets/styles/salesforce-lightning-design-system-ltng.css" />
+    <!--div class="SLDS"-->
+    <aura:attribute name="accounts" type="List" />
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+  <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+    <thead>
+      <tr class="slds-text-heading--label">
+        <th scope="col"><div class="slds-truncate" title="ID">ID</div></th>
+        <th scope="col"><div class="slds-truncate" title="Name">Name</div></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use the Apex model and controller to fetch server side data -->
+      <aura:iteration items="{!v.accounts}" var="account">
+        <tr>
+          <th scope="row"><div class="slds-truncate" title="{!account.Id}">{!account.Id}</div></th>
+          <td><div class="slds-truncate" title="{!account.Name}">{!account.Name}</div></td>
+          <td>
+            <form class="account-form" onsubmit="{!c.deleteAccount}">
+              <input type="hidden" value="{!account.Name}" class="account-name" />
+              <lightning:button label="Delete" iconName="utility:delete" iconPosition="left" variant="destructive"/>
+            </form>
+          </td>
+        </tr>
+      </aura:iteration>
+    </tbody>
+  </table>
+<!--/div-->
+    </aura:component>

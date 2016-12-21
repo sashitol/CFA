@@ -1,0 +1,8 @@
+<apex:page standardController="Opportunity" extensions="opportunityButton" >  
+<apex:sectionHeader title="Open Salesforce Opportunity and Pop Page"/>   
+<apex:outputPanel > You tried calling the an Apex Controller from a button.  If you see this page, something went wrong. Print this page and send the error to HDNotifier.  
+ <apex:form >
+<apex:commandButton action="{!autoRun}" value="Send an email"/>
+ </apex:form>
+</apex:outputPanel> 
+</apex:page>

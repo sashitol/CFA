@@ -1,0 +1,12 @@
+<aura:component access="public">
+    <aura:attribute name="sortColumn" type="String" access="public"/>
+    <aura:attribute name="sortOrder" type="String" access="public"/>
+    <aura:attribute name="column" type="Object" access="public"/>
+
+    <aura:registerEvent name="sortColumnByEvt" type="ldt:sortColumnBy"/>
+    <aura:handler event="ldt:doneSortingColumn" action="{!c.doneSorting}"/>
+
+    <th aura:id="colCmp" scope="col" title="{!v.column.label}" class="slds-truncate slds-is-sortable thAlign" width="{!v.column.width+'px'}" onclick="{!c.sort}">
+        <span class="toggle">{!v.column.label}</span>
+    </th>
+</aura:component>

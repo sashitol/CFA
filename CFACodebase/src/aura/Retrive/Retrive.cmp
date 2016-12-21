@@ -1,0 +1,11 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    <ltng:require styles="/resource/SLDS214/assets/styles/salesforce-lightning-design-system-ltng.css" />
+
+    <!--myNamespace:myListComponent--> 
+    <aura:attribute name="numbers" type="List"/>
+    <ui:button press="{!c.getNumbers}" label="Display Numbers" /> <aura:iteration var="num" items="{!v.numbers}">
+    {!num.a}
+    </aura:iteration>
+        <lightning:button variant="brand" label="Submit" />
+
+</aura:component>

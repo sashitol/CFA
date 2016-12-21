@@ -1,0 +1,7 @@
+<aura:component controller="LookupCController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+	    <ltng:require styles="/resource/SLDS214/assets/styles/salesforce-lightning-design-system-ltng.css" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <aura:attribute name="lookupAPIName" type="String" description="Name of the lookup field ie Primary_Contact__c" access="global"/>
+    <aura:attribute name="searchString" type="String" description="return value" access="global"/>
+
+</aura:component>
